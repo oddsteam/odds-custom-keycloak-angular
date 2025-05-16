@@ -11,7 +11,7 @@ import { HttpHeaders } from '@angular/common/http';
 
 import { Subject, from } from 'rxjs';
 import { map } from 'rxjs/operators';
-import Keycloak from 'keycloak-js';
+import Keycloak, { KeycloakProfile } from 'keycloak-js';
 
 import {
   ExcludedUrl,
@@ -32,11 +32,11 @@ export class KeycloakService {
   /**
    * Keycloak-js instance.
    */
-  private _instance: Keycloak.KeycloakInstance;
+  private _instance: Keycloak;
   /**
    * User profile as KeycloakProfile interface.
    */
-  private _userProfile: Keycloak.KeycloakProfile;
+  private _userProfile: KeycloakProfile;
   /**
    * Flag to indicate if the bearer will not be added to the authorization header.
    */
@@ -205,7 +205,7 @@ export class KeycloakService {
     this.initServiceValues(options);
     const { config, initOptions } = options;
 
-    this._instance = Keycloak(config);
+    this._instance = new Keycloak(config);
     this.bindsKeycloakEvents();
 
     const authenticated = await this._instance.init(initOptions);
