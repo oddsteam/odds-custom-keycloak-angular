@@ -67,8 +67,6 @@
     "keycloak-js": "^25.0.0"
   },
   "files": [
-  "dist",
-  "package.json",
-  "README.md"
-]
+    "dist"
+  ]
 }
